@@ -1,0 +1,12 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="icons">
+        <file alias="dashboard.png">icons/dashboard.png</file>
+        <file alias="today.png">icons/today.png</file>
+        <file alias="client.png">icons/client.png</file>
+        <file alias="book.png">icons/book.png</file>
+        <file alias="report.png">icons/report.png</file>
+        <file alias="settings.png">icons/settings.png</file>
+        <file alias="history.png">icons/history.png</file>
+    </qresource>
+</RCC>
