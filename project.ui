@@ -2242,7 +2242,7 @@ PlotWidget {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="tab_19">
      <attribute name="title">
@@ -2946,7 +2946,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_11">
        <attribute name="title">
@@ -3382,7 +3382,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_13">
        <attribute name="title">
@@ -3685,7 +3685,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -4674,7 +4674,7 @@ PlotWidget {
      <x>0</x>
      <y>0</y>
      <width>885</width>
-     <height>30</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>
