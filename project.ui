@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>884</width>
+    <width>885</width>
     <height>598</height>
    </rect>
   </property>
@@ -3685,7 +3685,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -4519,7 +4519,7 @@ PlotWidget {
      <string>Today</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/today.png</normaloff>:/icons/today.png</iconset>
     </property>
     <property name="iconSize">
@@ -4542,7 +4542,7 @@ PlotWidget {
      <string>Book</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
     </property>
     <property name="iconSize">
@@ -4565,7 +4565,7 @@ PlotWidget {
      <string>Client</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/client.png</normaloff>:/icons/client.png</iconset>
     </property>
     <property name="iconSize">
@@ -4588,7 +4588,7 @@ PlotWidget {
      <string>Dashboard</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/dashboard.png</normaloff>:/icons/dashboard.png</iconset>
     </property>
     <property name="iconSize">
@@ -4611,7 +4611,7 @@ PlotWidget {
      <string>History</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/history.png</normaloff>:/icons/history.png</iconset>
     </property>
     <property name="iconSize">
@@ -4634,7 +4634,7 @@ PlotWidget {
      <string>Report</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
     </property>
     <property name="iconSize">
@@ -4657,7 +4657,7 @@ PlotWidget {
      <string>Settings</string>
     </property>
     <property name="icon">
-     <iconset resource="icons-project.qrc">
+     <iconset resource="icons_project.qrc">
       <normaloff>:/icons/settings.png</normaloff>:/icons/settings.png</iconset>
     </property>
     <property name="iconSize">
@@ -4673,15 +4673,15 @@ PlotWidget {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>884</width>
-     <height>31</height>
+     <width>885</width>
+     <height>30</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="icons-project.qrc"/>
+  <include location="icons_project.qrc"/>
  </resources>
  <connections/>
 </ui>

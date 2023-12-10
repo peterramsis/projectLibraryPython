@@ -1,14 +1,16 @@
 import sys
+
+from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from PyQt5.uic import loadUiType #error appears here
+import PyQt5.uic
 import sys
 import os
 from os import path
 
-MainUI,_ = loadUiType("main.ui")
-class Main:
+MainUI,_ = uic.loadUiType("project.ui")
+class Main(QMainWindow,MainUI):
     def __init__(self,parent=None):
         super(Main, self).__init__(parent)
         QMainWindow.__init__(self)
@@ -20,3 +22,6 @@ def main():
     windows = Main()
     windows.show()
     app.exec_()
+
+
+main()
