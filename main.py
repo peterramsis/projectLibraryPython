@@ -19,8 +19,6 @@ class Main(QMainWindow,MainUI):
         self.db_connect()
         self.handel_buttons()
         self.ui_changes()
-
-
     def ui_changes(self):
         self.tabWidget.tabBar().setVisible(0)
 
@@ -39,35 +37,63 @@ class Main(QMainWindow,MainUI):
         self.pushButton_7.clicked.connect(self.open_settings_tab)
         #add branch
         self.pushButton_23.clicked.connect(self.add_branch)
+        #add publisher
+        self.pushButton_24.clicked.connect(self.add_publisher)
+        #add author
+        self.pushButton_25.clicked.connect(self.add_author)
+        #add category
+        self.pushButton_26.clicked.connect(self.add_category)
+        self.getAllCategory()
 
     def add_client(self):
         pass
-
     def add_branch(self):
         name= self.lineEdit_36.text()
         code= self.lineEdit_37.text()
         location = self.lineEdit_38.text()
-
-
-        self.cur.execute(''' Insert into branch(name, code , location) Values(%s,%s,%s) ''' , (name, code ,location))
+        self.cur.execute('''Insert into branch(name, code , location) Values(%s,%s,%s)''',(name,code,location))
         self.db.commit()
-        print("Branch added");
+        print("Branch added")
+    def add_publisher(self):
+        name = self.lineEdit_39.text()
+        location = self.lineEdit_40.text()
+        self.cur.execute('''Insert into publisher(name , location) Values(%s,%s)''',(name,location))
+        self.db.commit()
+        print("Publisher added")
+    def add_author(self):
+        name = self.lineEdit_41.text()
+        location = self.lineEdit_42.text()
+        self.cur.execute('''Insert into author(name , location) Values(%s,%s)''', (name, location))
+        self.db.commit()
+        print("author added")
+
+    def add_category(self):
+        name = self.lineEdit_43.text()
+        parent = self.comboBox_5.currentIndex() +10
+        self.cur.execute('''Insert into category(name , parent_category) Values(%s,%s)''', (name, parent))
+        self.db.commit()
+        print("category added")
+        self.getAllCategory()
+
+    def getAllCategory(self):
+        self.comboBox_5.clear()
+        self.cur.execute(''' select name from category ''')
+        categories= self.cur.fetchall();
+
+        for  category in categories:
+            print(category)
+            self.comboBox_5.addItem(str(category[0]))
 
     def open_today_tab(self):
         self.tabWidget.setCurrentIndex(2)
-
-
     def open_book_tab(self):
        self.tabWidget.setCurrentIndex(3)
        self.tabWidget_2.setCurrentIndex(0)
-
     def open_client_tab(self):
        self.tabWidget.setCurrentIndex(4)
        self.tabWidget_3.setCurrentIndex(0)
-
     def open_dashboard_tab(self):
        self.tabWidget.setCurrentIndex(5)
-
     def open_history_tab(self):
        self.tabWidget.setCurrentIndex(6)
 
