@@ -2242,7 +2242,7 @@ PlotWidget {
      </rect>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_19">
      <attribute name="title">
@@ -2511,7 +2511,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_8">
        <attribute name="title">
@@ -2617,7 +2617,7 @@ PlotWidget {
           <x>10</x>
           <y>20</y>
           <width>321</width>
-          <height>351</height>
+          <height>231</height>
          </rect>
         </property>
         <property name="alignment">
@@ -2707,9 +2707,9 @@ PlotWidget {
         <property name="geometry">
          <rect>
           <x>180</x>
-          <y>390</y>
+          <y>410</y>
           <width>341</width>
-          <height>51</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="text">
@@ -2759,6 +2759,94 @@ PlotWidget {
           <string>----Select-----</string>
          </property>
         </item>
+       </widget>
+       <widget class="QLabel" name="label_26">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>340</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Branch</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_15">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>330</y>
+          <width>251</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>----Select-----</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QComboBox" name="comboBox_16">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>260</y>
+          <width>251</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>----Select-----</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>260</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>publisher</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_8">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>310</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>barcode</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_52">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>360</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>status</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_10">
@@ -3712,7 +3800,7 @@ PlotWidget {
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_16">
        <attribute name="title">
@@ -4018,7 +4106,7 @@ PlotWidget {
         <property name="geometry">
          <rect>
           <x>70</x>
-          <y>380</y>
+          <y>410</y>
           <width>191</width>
           <height>51</height>
          </rect>
@@ -4150,7 +4238,7 @@ PlotWidget {
         <property name="geometry">
          <rect>
           <x>400</x>
-          <y>380</y>
+          <y>400</y>
           <width>191</width>
           <height>51</height>
          </rect>
@@ -4701,7 +4789,7 @@ PlotWidget {
      <x>0</x>
      <y>0</y>
      <width>881</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
   </widget>

@@ -1,5 +1,6 @@
+import datetime
 import sys
-
+import time
 import pymysql
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
@@ -43,14 +44,16 @@ class Main(QMainWindow,MainUI):
         self.pushButton_25.clicked.connect(self.add_author)
         #add category
         self.pushButton_26.clicked.connect(self.add_category)
-        self.getAll(self.comboBox_5, "category")
-        self.getAll(self.comboBox_2, "category")
-        self.getAll(self.comboBox_3, "category")
-        self.getAll(self.comboBox_4, "category")
+        self.getAll(self.comboBox_5,  "category")
+        self.getAll(self.comboBox_2,  "category")
+        self.getAll(self.comboBox_3,  "category")
+        self.getAll(self.comboBox_4,  "category")
         self.getAll(self.comboBox_13, "author")
         self.getAll(self.comboBox_14, "author")
-
-
+        self.getAll(self.comboBox_15, "branch")
+        self.getAll(self.comboBox_16, "publisher")
+        # add category
+        self.pushButton_9.clicked.connect(self.add_book)
 
 
 
@@ -88,7 +91,45 @@ class Main(QMainWindow,MainUI):
         self.cur.execute('''Insert into category(name , parent_category) Values(%s,%s)''', (name, parent))
         self.db.commit()
         print("category added")
-        self.getAllCategory()
+        self.getAll(comboBox="comboBox_5" , "category")
+
+    def add_book(self):
+        try:
+            title = self.lineEdit_3.text()
+            description = self.lineEdit_2.text()
+            price = self.lineEdit_4.text()
+            code = self.lineEdit_7.text()
+            part = self.lineEdit_6.text()
+            barcode = self.lineEdit_8.text()
+            categoryText = self.comboBox_3.currentText()
+            branchText = self.comboBox_15.currentText()
+            authorText = self.comboBox_13.currentText()
+            publisherText = self.comboBox_16.currentText()
+            status = self.lineEdit_52.text()
+
+            date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+            self.cur.execute('''select id from category where name = %s ''' , (categoryText))
+            category= self.cur.fetchone()[0]
+
+            self.cur.execute('''select id from branch where name = %s ''', (branchText))
+            branch = self.cur.fetchone()[0]
+
+            self.cur.execute('''select id from author where name = %s ''', (authorText))
+            author = self.cur.fetchone()[0]
+
+            self.cur.execute('''select id from publisher where name = %s ''', (publisherText))
+            publisher = self.cur.fetchone()[0]
+
+
+            self.cur.execute('''Insert into book(title , description , category_id , code , barcode , part_order , publisher_id , price, author_id ,branch_id,status,date) Values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',(title, description, category , code,barcode ,part ,publisher,price ,author,branch,status,date))
+            self.db.commit()
+            print("book added")
+
+
+
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
+            print(e)
 
 
     def getAll(self,comboBox , table):
