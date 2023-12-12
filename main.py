@@ -43,7 +43,16 @@ class Main(QMainWindow,MainUI):
         self.pushButton_25.clicked.connect(self.add_author)
         #add category
         self.pushButton_26.clicked.connect(self.add_category)
-        self.getAllCategory()
+        self.getAll(self.comboBox_5, "category")
+        self.getAll(self.comboBox_2, "category")
+        self.getAll(self.comboBox_3, "category")
+        self.getAll(self.comboBox_4, "category")
+        self.getAll(self.comboBox_13, "author")
+        self.getAll(self.comboBox_14, "author")
+
+
+
+
 
     def add_client(self):
         pass
@@ -69,20 +78,28 @@ class Main(QMainWindow,MainUI):
 
     def add_category(self):
         name = self.lineEdit_43.text()
-        parent = self.comboBox_5.currentIndex() +10
+        parentText = self.comboBox_5.currentText()
+        self.cur.execute('''select id from category where name = %s ''' , (parentText))
+        if parentText == "---select---" :
+            parent = 0
+        else:
+            parent= self.cur.fetchone()[0]
+        print(parent)
         self.cur.execute('''Insert into category(name , parent_category) Values(%s,%s)''', (name, parent))
         self.db.commit()
         print("category added")
         self.getAllCategory()
 
-    def getAllCategory(self):
-        self.comboBox_5.clear()
-        self.cur.execute(''' select name from category ''')
-        categories= self.cur.fetchall();
 
-        for  category in categories:
-            print(category)
-            self.comboBox_5.addItem(str(category[0]))
+    def getAll(self,comboBox , table):
+        comboBox.clear()
+        comboBox.addItem("---select---")
+        self.cur.execute('select name from {0}'.format(table))
+        data = self.cur.fetchall()
+        for item in data:
+            comboBox.addItem(str(item[0]))
+
+
 
     def open_today_tab(self):
         self.tabWidget.setCurrentIndex(2)
