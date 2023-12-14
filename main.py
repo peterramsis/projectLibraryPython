@@ -55,10 +55,15 @@ class Main(QMainWindow,MainUI):
         # add category
         self.pushButton_9.clicked.connect(self.add_book)
 
+        self.pushButton_13.clicked.connect(self.add_client)
+
+        self.getBooks()
+        self.getClient()
+        self.pushButton_15.clicked.connect(self.searchByClient)
 
 
-    def add_client(self):
-        pass
+
+
     def add_branch(self):
         name= self.lineEdit_36.text()
         code= self.lineEdit_37.text()
@@ -91,7 +96,7 @@ class Main(QMainWindow,MainUI):
         self.cur.execute('''Insert into category(name , parent_category) Values(%s,%s)''', (name, parent))
         self.db.commit()
         print("category added")
-        self.getAll(comboBox="comboBox_5" , "category")
+        self.getAll(self.comboBox_5, "category")
 
     def add_book(self):
         try:
@@ -132,6 +137,19 @@ class Main(QMainWindow,MainUI):
             print(e)
 
 
+    def add_client(self):
+        name = self.lineEdit_15.text()
+        mail = self.lineEdit_16.text()
+        phone = self.lineEdit_17.text()
+        national_id = self.lineEdit_22.text()
+        date = time.strftime('%Y-%m-%d %H:%M:%S')
+        self.cur.execute('''Insert into client(name , mail, phone, date , national_id) Values(%s,%s,%s,%s,%s)''', (name , mail , phone , date , national_id))
+        self.db.commit()
+        print("client added")
+        self.getClient()
+
+
+
     def getAll(self,comboBox , table):
         comboBox.clear()
         comboBox.addItem("---select---")
@@ -140,7 +158,38 @@ class Main(QMainWindow,MainUI):
         for item in data:
             comboBox.addItem(str(item[0]))
 
+    def getBooks(self):
+        self.cur.execute('select code,title,description,author_id,category_id,price from book')
+        self.tableWidget_2.insertRow(0)
+        data = self.cur.fetchall()
+        for row, form in enumerate(data):
+            for col, item in enumerate(form):
+                self.tableWidget_2.setItem(row, col, QTableWidgetItem(str(item)))
+                col += 1
+            row_position = self.tableWidget_2.rowCount()
+    def searchByClient(self):
+       print("click")
+       search =  self.lineEdit_26.text()
+       self.cur.execute('''select * from client where name = %s''' , (search))
+       data = self.cur.fetchone()
+       print(data)
+       self.lineEdit_24.setText(data[1])
+       self.lineEdit_21.setText(data[2])
+       self.lineEdit_23.setText(data[3])
+       self.lineEdit_25.setText(data[6])
 
+
+
+
+    def getClient(self):
+        self.cur.execute('select name,mail,phone,date,national_id from client')
+        self.tableWidget_3.insertRow(0)
+        data = self.cur.fetchall()
+        for row, form in enumerate(data):
+            for col, item in enumerate(form):
+                self.tableWidget_3.setItem(row, col, QTableWidgetItem(str(item)))
+                col += 1
+            row_position = self.tableWidget_3.rowCount()
 
     def open_today_tab(self):
         self.tabWidget.setCurrentIndex(2)
