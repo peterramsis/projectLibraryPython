@@ -60,6 +60,8 @@ class Main(QMainWindow,MainUI):
         self.getBooks()
         self.getClient()
         self.pushButton_15.clicked.connect(self.searchByClient)
+        self.pushButton_16.clicked.connect(self.update_clinet)
+        self.pushButton_14.clicked.connect(self.delete_client)
 
 
 
@@ -133,8 +135,8 @@ class Main(QMainWindow,MainUI):
 
 
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
-            print(e)
+        except:
+            print("error")
 
 
     def add_client(self):
@@ -163,10 +165,11 @@ class Main(QMainWindow,MainUI):
         self.tableWidget_2.insertRow(0)
         data = self.cur.fetchall()
         for row, form in enumerate(data):
+            self.tableWidget_2.insertRow(row)
             for col, item in enumerate(form):
                 self.tableWidget_2.setItem(row, col, QTableWidgetItem(str(item)))
                 col += 1
-            row_position = self.tableWidget_2.rowCount()
+        row_position = self.tableWidget_2.rowCount()
     def searchByClient(self):
        print("click")
        search =  self.lineEdit_26.text()
@@ -176,20 +179,40 @@ class Main(QMainWindow,MainUI):
        self.lineEdit_24.setText(data[1])
        self.lineEdit_21.setText(data[2])
        self.lineEdit_23.setText(data[3])
-       self.lineEdit_25.setText(data[6])
+       self.lineEdit_25.setText(str(data[5]))
 
 
 
 
     def getClient(self):
-        self.cur.execute('select name,mail,phone,date,national_id from client')
+        self.cur.execute('select name,mail,phone,national_id from client')
         self.tableWidget_3.insertRow(0)
         data = self.cur.fetchall()
         for row, form in enumerate(data):
+            self.tableWidget_3.insertRow(row)
             for col, item in enumerate(form):
                 self.tableWidget_3.setItem(row, col, QTableWidgetItem(str(item)))
                 col += 1
-            row_position = self.tableWidget_3.rowCount()
+        row_position = self.tableWidget_3.rowCount()
+        print(row_position)
+
+    def update_clinet(self):
+        search =  self.lineEdit_26.text()
+        name = self.lineEdit_24.text()
+        mail = self.lineEdit_21.text()
+        phone = self.lineEdit_23.text()
+        national_id =  self.lineEdit_25.text()
+
+        self.cur.execute('''update client set name = %s , mail = %s , phone = %s , national_id = %s  where name = %s''' , (name , mail , phone , national_id,search))
+        self.db.commit()
+        print("update client")
+        self.getClient()
+
+    def delete_client(self):
+        search = self.lineEdit_26.text()
+        self.cur.execute('''delete from client where name = %s''',(search))
+        self.db.commit()
+        print("delete client")
 
     def open_today_tab(self):
         self.tabWidget.setCurrentIndex(2)
