@@ -206,7 +206,8 @@ class Main(QMainWindow,MainUI):
         self.cur.execute('''update client set name = %s , mail = %s , phone = %s , national_id = %s  where name = %s''' , (name , mail , phone , national_id,search))
         self.db.commit()
         print("update client")
-        self.getClient()
+        self.statusBar().showMessage("Update client")
+        QMessageBox.information(self, "success","Update client")
 
     def delete_client(self):
         search = self.lineEdit_26.text()
