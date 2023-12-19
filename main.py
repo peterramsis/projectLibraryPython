@@ -62,6 +62,11 @@ class Main(QMainWindow,MainUI):
         self.pushButton_15.clicked.connect(self.searchByClient)
         self.pushButton_16.clicked.connect(self.update_clinet)
         self.pushButton_14.clicked.connect(self.delete_client)
+        self.pushButton_17.clicked.connect(self.getClient)
+        self.pushButton_12.clicked.connect(self.searchByBook)
+        self.pushButton_10.clicked.connect(self.update_book)
+        self.pushButton_11.clicked.connect(self.delete_book)
+
 
 
 
@@ -138,6 +143,38 @@ class Main(QMainWindow,MainUI):
         except:
             print("error")
 
+    def searchByBook(self):
+        print("click")
+        search = self.lineEdit_14.text()
+        self.cur.execute('''select title,code,category_id,price,author_id,part_order,description from book where title = %s''', (search))
+        data = self.cur.fetchone()
+        self.lineEdit_9.setText(str(data[0]))
+        self.lineEdit_13.setText(str(data[1]))
+
+        self.lineEdit_10.setText(str(data[3]))
+        self.comboBox_4.setCurrentIndex(data[2])
+        self.comboBox_14.setCurrentIndex(data[4])
+        self.lineEdit_11.setText(str(data[5]))
+        self.lineEdit_12.setText(str(data[6]))
+
+    def update_book(self):
+        search =  self.lineEdit_14.text()
+        title = self.lineEdit_9.text()
+        code = self.lineEdit_13.text()
+
+        self.cur.execute('''update book set title = %s , code = %s  where title = %s''' , (title,code,search))
+        self.db.commit()
+        print("update book")
+        self.statusBar().showMessage("Update book")
+        QMessageBox.information(self, "success","Update book")
+        self.getBooks()
+
+    def delete_book(self):
+        search = self.lineEdit_26.text()
+        self.cur.execute('''delete from book where title = %s''',(search))
+        self.db.commit()
+        print("delete book")
+        self.getBooks()
 
     def add_client(self):
         name = self.lineEdit_15.text()
@@ -165,11 +202,10 @@ class Main(QMainWindow,MainUI):
         self.tableWidget_2.insertRow(0)
         data = self.cur.fetchall()
         for row, form in enumerate(data):
-            self.tableWidget_2.insertRow(row)
+            self.tableWidget_2.setRowCount(row + 1)
             for col, item in enumerate(form):
                 self.tableWidget_2.setItem(row, col, QTableWidgetItem(str(item)))
-                col += 1
-        row_position = self.tableWidget_2.rowCount()
+        self.tableWidget_2.resizeColumnsToContents()
     def searchByClient(self):
        print("click")
        search =  self.lineEdit_26.text()
@@ -185,16 +221,19 @@ class Main(QMainWindow,MainUI):
 
 
     def getClient(self):
-        self.cur.execute('select name,mail,phone,national_id from client')
-        self.tableWidget_3.insertRow(0)
+        search = self.lesearchbook_2.text()
+        if search == "":
+          self.cur.execute('select name,mail,phone,national_id from client')
+        else:
+          self.cur.execute('''select name,mail,phone,national_id from client where name = %s''' ,(search))
+
         data = self.cur.fetchall()
+        print(data)
         for row, form in enumerate(data):
-            self.tableWidget_3.insertRow(row)
+            self.tableWidget_3.setRowCount(row + 1)
             for col, item in enumerate(form):
                 self.tableWidget_3.setItem(row, col, QTableWidgetItem(str(item)))
-                col += 1
-        row_position = self.tableWidget_3.rowCount()
-        print(row_position)
+        self.tableWidget.resizeColumnsToContents()
 
     def update_clinet(self):
         search =  self.lineEdit_26.text()
@@ -208,12 +247,13 @@ class Main(QMainWindow,MainUI):
         print("update client")
         self.statusBar().showMessage("Update client")
         QMessageBox.information(self, "success","Update client")
-
+        self.getClient()
     def delete_client(self):
         search = self.lineEdit_26.text()
         self.cur.execute('''delete from client where name = %s''',(search))
         self.db.commit()
         print("delete client")
+        self.getClient()
 
     def open_today_tab(self):
         self.tabWidget.setCurrentIndex(2)
