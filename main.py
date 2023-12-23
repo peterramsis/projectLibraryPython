@@ -161,8 +161,19 @@ class Main(QMainWindow,MainUI):
         search =  self.lineEdit_14.text()
         title = self.lineEdit_9.text()
         code = self.lineEdit_13.text()
+        description= self.lineEdit_12.text()
+        price = self.lineEdit_10.text()
+        part_order = self.lineEdit_11.text()
 
-        self.cur.execute('''update book set title = %s , code = %s  where title = %s''' , (title,code,search))
+        categoryText = self.comboBox_4.currentText()
+        authorText = self.comboBox_14.currentText()
+
+        self.cur.execute('''select id from category where name = %s ''', (categoryText))
+        category = self.cur.fetchone()[0]
+        self.cur.execute('''select id from author where name = %s ''', (authorText))
+        author = self.cur.fetchone()[0]
+
+        self.cur.execute('''update book set title = %s , code = %s , description = %s , price = %s,part_order = %s , author_id = %s, category_id = %s  where title = %s''' , (title,code,description,price ,part_order,author,category,search))
         self.db.commit()
         print("update book")
         self.statusBar().showMessage("Update book")
